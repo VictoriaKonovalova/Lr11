@@ -55,21 +55,22 @@ def listt(trains):
     print(line)
 
 
-def select(trains, number):
-    count = 0
-    for train in trains:
-        if train.get('num') == number:
-            count += 1
-            print('Номер поезда:', train.get('num', ''))
-            print('Пункт назначения:', train.get('name', ''))
-            print('Время отправления:', train.get('time', ''))
+def select_train(trains, number):
+    """""
+    Выбрать работников с заданным стажем
+    """""
+    # Сформировать список поездов
+    result = []
+    for rattler in trains:
+        if rattler.get('num') == number:
+            result.append(rattler)
 
-    if count == 0:
-        print("Таких поездов нет!")
+    # Возвратить список выбранных работников
+    return result
 
 
 def main():
-    trains = []
+    route = []
 
     while True:
         command = input(">>> ").lower()
@@ -82,15 +83,16 @@ def main():
             num = int(input("Номер поезда: "))
             time = input("Время отправления: ")
 
-            add(trains, name, num, time)
+            add(route, name, num, time)
 
         elif command == 'list':
-            listt(trains)
+            listt(route)
 
-        elif command.startswith('select'):
-            parts = command.split(' ', maxsplit=2)
+        elif command.startswith('select '):
+            parts = command.split(' ', maxsplit=1)
             number = int(parts[1])
-            select(trains, number)
+            selected = select_train(route, number)
+            listt(selected)
 
         elif command == 'help':
             print("Список команд:\n")
