@@ -13,6 +13,7 @@ import sys
 
 
 def add(trains, name, num, time):
+    # Создать словарь
     train = {
         'name': name,
         'num': num,
@@ -25,39 +26,45 @@ def add(trains, name, num, time):
 
 
 def listt(trains):
-    line = '+-{}-+-{}-+-{}-+-{}-+'.format(
-        '-' * 4,
-        '-' * 30,
-        '-' * 20,
-        '-' * 17
-    )
-    print(line)
-    print(
-        '| {:^4} | {:^30} | {:^20} | {:^17} |'.format(
-            "№",
-            "Пункт назначения",
-            "Номер поезда",
-            "Время отправления"
+    """
+        Отобразить список маршрутов
+    """
+    if trains:
+        line = '+-{}-+-{}-+-{}-+-{}-+'.format(
+            '-' * 4,
+            '-' * 30,
+            '-' * 20,
+            '-' * 17
         )
-    )
-    print(line)
-
-    for idx, train in enumerate(trains, 1):
+        print(line)
         print(
-            '| {:>4} | {:<30} | {:<20} | {:>17} |'.format(
-                idx,
-                train.get('name', ''),
-                train.get('num', ''),
-                train.get('time', 0)
+            '| {:^4} | {:^30} | {:^20} | {:^17} |'.format(
+                "№",
+                "Пункт назначения",
+                "Номер поезда",
+                "Время отправления"
             )
         )
+        print(line)
+        # Вывести данные о всех маршрутах
+        for idx, train in enumerate(trains, 1):
+            print(
+                '| {:>4} | {:<30} | {:<20} | {:>17} |'.format(
+                    idx,
+                    train.get('name', ''),
+                    train.get('num', ''),
+                    train.get('time', 0)
+                )
+            )
 
-    print(line)
+        print(line)
+    else:
+        print("Список маршрутов пуст!")
 
 
 def select_train(trains, number):
     """""
-    Выбрать работников с заданным стажем
+    Выбрать маршруты с заданным номер поезда
     """""
     # Сформировать список поездов
     result = []
@@ -65,13 +72,18 @@ def select_train(trains, number):
         if rattler.get('num') == number:
             result.append(rattler)
 
-    # Возвратить список выбранных работников
+    # Возвратить список выбранных маршрутов
     return result
 
 
 def main():
+    """
+        Главная функция программы
+    """
+    # Сформировать список маршрутов
     route = []
 
+    # Организовать бесконечный цикл запроса команд
     while True:
         command = input(">>> ").lower()
 
